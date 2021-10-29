@@ -4,6 +4,7 @@
 /node_modules
 /package-lock.json
 /dist
+/.parcel-cache
 /.pnp
 .pnp.js
 
@@ -14,7 +15,6 @@
 /build
 
 # misc
-.parcel-cache
 .env
 .DS_Store
 .env.local
