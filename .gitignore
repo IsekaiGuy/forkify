@@ -14,6 +14,7 @@
 /build
 
 # misc
+.parcel-cache
 .env
 .DS_Store
 .env.local
