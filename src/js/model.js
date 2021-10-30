@@ -6,6 +6,10 @@ import { getJSON } from "./helpers";
 
 export const state = {
   recipe: {},
+  search: {
+    query: "",
+    results: [],
+  },
 };
 
 export const loadRecipe = async (id) => {
@@ -27,3 +31,31 @@ export const loadRecipe = async (id) => {
     throw error(err);
   }
 };
+
+export const loadSearchResults = async (query) => {
+  try {
+    state.search.query = query;
+
+    const data = await getJSON(`${API_URL}?search=${query}`);
+
+    state.search.results = data.data.recipes.map((rec) => {
+      return {
+        id: rec.id,
+        title: rec.title,
+        publisher: rec.publisher,
+        image: rec.image_url,
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+// Weird stuff
+const removeNoops = () => {
+  document.querySelectorAll("#noop").forEach((el) => {
+    el.style.display = "none";
+  });
+};
+
+setTimeout(() => removeNoops(), 2000);
