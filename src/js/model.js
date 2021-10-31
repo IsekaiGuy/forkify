@@ -62,6 +62,16 @@ export const getSearchResultsPage = (page = state.search.page) => {
   return state.search.results.slice(start, end);
 };
 
+export const updateServings = (newServings) => {
+  state.recipe.ingredients.forEach(
+    (ingredient) =>
+      (ingredient.quantity =
+        (ingredient.quantity * newServings) / state.recipe.servings)
+  );
+
+  state.recipe.servings = newServings;
+};
+
 // Weird stuff
 const removeNoops = () => {
   document.querySelectorAll("#noop").forEach((el) => {
