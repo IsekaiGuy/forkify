@@ -8,10 +8,20 @@ const timeout = function (s) {
   });
 };
 
-export const getJSON = async (url) => {
+const AJAX = async (url, uploadData = undefined) => {
   try {
+    const fetchPro = uploadData
+      ? fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(uploadData),
+        })
+      : fetch(url);
+
     // prettier-ignore
-    const res = await Promise.race([fetch(url), timeout(TIMEOUT)]);
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT)]);
 
     const data = await res.json();
 
@@ -21,3 +31,5 @@ export const getJSON = async (url) => {
     throw err;
   }
 };
+
+export default AJAX;
