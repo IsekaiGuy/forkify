@@ -91,12 +91,17 @@ const removeNoops = () => {
 setTimeout(() => removeNoops(), 2000);
 ///////////////////////////////
 
+const persistBookmarks = () => {
+  localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+};
+
 export const addBookmark = (recipe) => {
   // Add BOOKMARK
   state.bookmarks.push(recipe);
 
   // Mark current recipe as BOOKMARKED
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+  persistBookmarks();
 };
 
 export const deleteBookmark = (id) => {
@@ -106,4 +111,18 @@ export const deleteBookmark = (id) => {
 
   // Mark current recipe as NOT BOOKMARKED
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  persistBookmarks();
 };
+
+const init = () => {
+  const storage = localStorage.getItem("bookmarks");
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();
+
+const clearBookmarks = () => {
+  localStorage.clear("bookmarks");
+};
+
+// clearBookmarks();
