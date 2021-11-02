@@ -6,7 +6,7 @@
 </p>
 
 <!-- ABOUT THE PROJECT -->
-![Alt text](/public/forkify.png?raw=true "Forkify")
+![Alt text](/src/img/forkify.png?raw=true "Forkify")
 
 ## About Project
 <p>
